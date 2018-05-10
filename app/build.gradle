@@ -120,32 +120,14 @@ dependencies {
     //    implementation retrofitLibs
     //    implementation okHttpLibs
 
+    implementation 'com.airbnb.android:lottie:2.5.4'
+
     compileOnly 'org.jetbrains:annotations:13.0'
     implementation 'com.google.code.gson:gson:2.4'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'com.jakewharton:butterknife:7.0.0'
     testImplementation unitTestLibs
     androidTestImplementation androidTestsLibs
-}
-
-// Grant animation permissions to avoid test failure because of ui sync.
-task grantAnimationPermissions(type: Exec, dependsOn: ['installStagingDebug', 'installProductionDebug']) {
-    group = 'test'
-    description = 'Grant permissions for testing.'
-
-    def absolutePath = file('..') // Get project absolute path
-    commandLine "$absolutePath/app/set_animation_permissions.sh com.flatstack.android".split(" ")
-}
-
-// Source: http://stackoverflow.com/q/29908110/112705
-afterEvaluate {
-    // When launching individual tests from Android Studio, it seems that only the assemble tasks
-    // get called directly, not the install* versions
-    tasks.each { task ->
-        if (task.name.endsWith('AndroidTest')) {
-            task.dependsOn grantAnimationPermissions
-        }
-    }
 }
 
 apply from: "quality.gradle"

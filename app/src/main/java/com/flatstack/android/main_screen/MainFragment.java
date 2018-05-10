@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.flatstack.android.R;
 import com.flatstack.android.SecondActivity;
@@ -16,7 +17,8 @@ import butterknife.Bind;
 public class MainFragment extends BaseFragment {
 
     @Bind(R.id.image) ImageView image;
-    @Bind(R.id.button) Button button;
+    @Bind(R.id.button) Button uiButton;
+    @Bind(R.id.lottie_animation) LottieAnimationView uiLottieAnimationView;
 
     @Override public int getLayoutRes() {
         return R.layout.fragment_main;
@@ -32,8 +34,10 @@ public class MainFragment extends BaseFragment {
                         getFragmentManager())
         );
 
-        button.setOnClickListener(v -> startActivity(new Intent(getActivity(),
+        uiButton.setOnClickListener(v -> startActivity(new Intent(getActivity(),
                 SecondActivity.class)));
+
+        uiLottieAnimationView.setOnClickListener(v -> uiLottieAnimationView.playAnimation());
 
         Glide.with(this)
                 .load("https://pbs.twimg.com/profile_images/502109671600033792/QOAC0YGo.png")
