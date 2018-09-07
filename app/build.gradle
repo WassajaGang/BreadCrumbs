@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.github.triplet.play'
 apply from: 'checkstyle/checkstyle.gradle'
 apply from: './jacoco.gradle'
 
@@ -15,7 +16,6 @@ ext {
 
 android {
     compileSdkVersion versions.TARGET_SDK_VERSION
-    buildToolsVersion versions.BUILD_TOOLS_VERSION
 
     defaultConfig {
         minSdkVersion versions.MIN_SDK_VERSION
@@ -106,6 +106,11 @@ android {
     configurations.all {
         resolutionStrategy.force "com.android.support:support-annotations:$versions.support"
     }
+    buildToolsVersion '27.0.3'
+}
+
+play {
+    jsonFile = file('android-base-publisher.json')
 }
 
 repositories {
